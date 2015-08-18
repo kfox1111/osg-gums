@@ -1,0 +1,12 @@
+--- /usr/sbin/tomcat6.orig	2015-08-18 18:15:22.030817805 +0000
++++ /usr/sbin/tomcat6	2015-08-18 18:15:44.681328322 +0000
+@@ -35,8 +35,7 @@
+     -Djava.io.tmpdir="$CATALINA_TMPDIR" \
+     -Djava.util.logging.config.file="${CATALINA_BASE}/conf/logging.properties" \
+     -Djava.util.logging.manager="org.apache.juli.ClassLoaderLogManager" \
+-    org.apache.catalina.startup.Bootstrap start \
+-    >> ${CATALINA_BASE}/logs/catalina.out 2>&1 &
++    org.apache.catalina.startup.Bootstrap start
+     if [ ! -z "$CATALINA_PID" ]; then
+       echo $! > $CATALINA_PID
+     fi
