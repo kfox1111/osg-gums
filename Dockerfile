@@ -7,6 +7,8 @@ RUN chmod +x /etc/start.sh
 
 ADD ./tomcat-run.patch /tmp/tomcat-run.patch
 RUN pushd /; patch -p0 < /tmp/tomcat-run.patch; popd
-RUN rm -f /tmp/ctomcat-run.patch
+RUN rm -f /tmp/tomcat-run.patch
+
+RUN /var/lib/trustmanager-tomcat/configure.sh
 
 CMD ["/etc/start.sh"]
