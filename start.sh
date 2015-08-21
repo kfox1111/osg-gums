@@ -6,7 +6,6 @@
 : ${MYSQL_USER:=gums}
 : ${MYSQL_PASSWD:=mysecret}
 : ${STORE_CONFIG:=false} 
-: ${parameter_name:=value}
 
 sed -i "s/\(storeConfig=\).*/\1'$STORE_CONFIG'/" /etc/gums/gums.config
 sed -i "s/\(hibernate.connection.username=\).*/\1'$MYSQL_USER'/" /etc/gums/gums.config
@@ -15,5 +14,13 @@ sed -i "s/\(hibernate.connection.password=\).*/\1'$MYSQL_PASSWD'\/>/" /etc/gums/
 
 #Force timestamp on gums config into the past, so it will not be copied to the database, but so that the db's copy will be copied back to the node.
 touch -t 201212121212.12 /etc/gums/gums.config
+
+if [ ! -f /etc/inited ]; then
+	mkdir -p /srv/var/log/tomcat6
+	chown tomcat /srv/var/log/tomcat6
+	mv /var/log/tomcat6 /var/log/tomcat6.orig
+	ln -s /srv/var/log/tomcat6 /var/log/tomcat6
+	touch /etc/inited
+fi
 
 /etc/init.d/tomcat6 start
