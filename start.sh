@@ -11,8 +11,8 @@
 : ${MYSQL_PASSWD:=mysecret}
 : ${STORE_CONFIG:=false} 
 
-sed -i 's/sslCertFile="[^"]*"/sslCertFile="'$GUMS_CERT'"/' /etc/tomcat6/server.xml
-sed -i 's/sslKey="[^"]*"/sslKey="'$GUMS_KEY'"/' /etc/tomcat6/server.xml
+sed -i 's@sslCertFile="[^"]*"@sslCertFile="'$GUMS_CERT'"@' /etc/tomcat6/server.xml
+sed -i 's@sslKey="[^"]*"@sslKey="'$GUMS_KEY'"@' /etc/tomcat6/server.xml
 sed -i 's/Connector port="[0-9]*"/Connector port="'$GUMS_PORT'"/' /etc/tomcat6/server.xml
 sed -i 's/Server port="[0-9]*"/Server port="'$GUMS_SERVER_PORT'"/' /etc/tomcat6/server.xml
 sed -i "s/\(storeConfig=\).*/\1'$STORE_CONFIG'/" /etc/gums/gums.config
